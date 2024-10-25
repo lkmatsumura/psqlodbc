@@ -3,12 +3,12 @@ run-name: psql ODBC CI - ${{ github.event.head_commit.message }}
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main" , "logintimeout"]
     tags:
       - 'REL-*'
       - '!REL-*-mimalloc'
   pull_request:
-    branches: [ "main" ]
+    branches: [ "main" , "logintimeout" ]
 
 env:
   # Path to the solution file relative to the root of the project.
