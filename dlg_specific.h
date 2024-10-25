@@ -87,7 +87,7 @@ extern "C" {
 #define INI_CONNSETTINGS		 "ConnSettings" /* Anything to send to
 							 * backend on successful
 							 * connection */
-#define ABBR_CONNSETTINGS	 "A6"
+#define ABBR_CONNSETTINGS		"A6"
 #define INI_UNIQUEINDEX			"UniqueIndex"	/* Recognize unique
 							 * indexes */
 #define INI_UNKNOWNSIZES		"UnknownSizes"	/* How to handle unknown
@@ -175,6 +175,8 @@ extern "C" {
 #define INI_DTCLOG			"Dtclog"
 #define INI_FETCHREFCURSORS		"FetchRefcursors"
 #define ABBR_FETCHREFCURSORS		"DA"
+#define INI_LOGINTIMEOUT		"LoginTimeout"
+
 /* "PreferLibpq", abbreviated "D4", used to mean whether to prefer libpq.
  * libpq is now required
 #define INI_PREFERLIBPQ			"PreferLibpq"
@@ -278,6 +280,7 @@ extern "C" {
 #define DEFAULT_BATCH_SIZE		100
 #define DEFAULT_IGNORETIMEOUT		0
 #define DEFAULT_FETCHREFCURSORS		0
+#define DEFAULT_LOGINTIMEOUT		0
 
 #ifdef	_HANDLE_ENLIST_IN_DTC_
 #define DEFAULT_XAOPT			1

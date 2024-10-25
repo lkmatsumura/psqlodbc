@@ -709,6 +709,7 @@ typedef struct
 	Int4		keepalive_idle;
 	Int4		keepalive_interval;
 	Int4		batch_size;
+	Int4		login_timeout;
 #ifdef	_HANDLE_ENLIST_IN_DTC_
 	signed char	xa_opt;
 #endif /* _HANDLE_ENLIST_IN_DTC_ */

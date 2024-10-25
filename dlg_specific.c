@@ -706,6 +706,8 @@ copyConnAttributes(ConnInfo *ci, const char *attribute, const char *value)
 		ci->optional_errors = atoi(value);
 	else if (stricmp(attribute, INI_IGNORETIMEOUT) == 0 || stricmp(attribute, ABBR_IGNORETIMEOUT) == 0)
 		ci->ignore_timeout = atoi(value);
+	else if (stricmp(attribute, INI_LOGINTIMEOUT) == 0)
+		ci->login_timeout = atoi(value);
 	else if (stricmp(attribute, INI_SSLMODE) == 0 || stricmp(attribute, ABBR_SSLMODE) == 0)
 	{
 		switch (value[0])
@@ -853,6 +855,7 @@ getCiDefaults(ConnInfo *ci)
 	}
 	ci->disable_convert_func = 0;
 	ci->fetch_refcursors = DEFAULT_FETCHREFCURSORS;
+	ci->login_timeout = DEFAULT_LOGINTIMEOUT;
 #ifdef	_HANDLE_ENLIST_IN_DTC_
 	ci->xa_opt = DEFAULT_XAOPT;
 #endif /* _HANDLE_ENLIST_IN_DTC_ */
@@ -1388,6 +1391,11 @@ writeDSNinfo(const ConnInfo *ci)
 								 INI_IGNORETIMEOUT,
 								 temp,
 								 ODBC_INI);
+	ITOA_FIXED(temp, ci->login_timeout);
+	SQLWritePrivateProfileString(DSN,
+								INI_LOGINTIMEOUT,
+								temp,
+								ODBC_INI);
 	ITOA_FIXED(temp, ci->fetch_refcursors);
 	SQLWritePrivateProfileString(DSN,
 								 INI_FETCHREFCURSORS,
@@ -1809,6 +1817,7 @@ CC_conninfo_init(ConnInfo *conninfo, UInt4 option)
 	conninfo->ignore_timeout = DEFAULT_IGNORETIMEOUT;
 	conninfo->wcs_debug = -1;
 	conninfo->fetch_refcursors = -1;
+	conninfo->login_timeout = DEFAULT_LOGINTIMEOUT;
 #ifdef	_HANDLE_ENLIST_IN_DTC_
 	conninfo->xa_opt = -1;
 #endif /* _HANDLE_ENLIST_IN_DTC_ */
@@ -1911,6 +1920,7 @@ CC_copy_conninfo(ConnInfo *ci, const ConnInfo *sci)
 	CORR_VALCPY(batch_size);
 	CORR_VALCPY(ignore_timeout);
 	CORR_VALCPY(fetch_refcursors);
+	CORR_VALCPY(login_timeout);
 #ifdef	_HANDLE_ENLIST_IN_DTC_
 	CORR_VALCPY(xa_opt);
 #endif
