@@ -421,7 +421,7 @@ PGAPI_GetConnectAttr(HDBC ConnectionHandle,
 			*((SQLUINTEGER *) Value) = CC_not_connected(conn);
 			break;
 		case SQL_ATTR_CONNECTION_TIMEOUT:
-			*((SQLUINTEGER *) Value) = 0;
+			*((SQLUINTEGER *) Value) = conn->connInfo.login_timeout;
 			break;
 		case SQL_ATTR_METADATA_ID:
 			*((SQLUINTEGER *) Value) = conn->stmtOptions.metadata_id;
@@ -1815,7 +1815,6 @@ PGAPI_SetConnectAttr(HDBC ConnectionHandle,
 			break;
 		case SQL_ATTR_ASYNC_ENABLE:
 		case SQL_ATTR_CONNECTION_DEAD:
-		case SQL_ATTR_CONNECTION_TIMEOUT:
 			unsupported = TRUE;
 			break;
 		case SQL_ATTR_PGOPT_DEBUG:
@@ -1904,6 +1903,10 @@ PGAPI_SetConnectAttr(HDBC ConnectionHandle,
 		case SQL_ATTR_PGOPT_BATCHSIZE:
 			conn->connInfo.batch_size = CAST_PTR(SQLINTEGER, Value);
 			MYLOG(0, "batch size => %d\n", conn->connInfo.batch_size);
+			break;
+		case SQL_ATTR_CONNECTION_TIMEOUT:
+			conn->connInfo.login_timeout = CAST_PTR(SQLINTEGER, Value);
+			MYLOG(0, "login_timeout => %d\n", conn->connInfo.login_timeout);
 			break;
 		case SQL_ATTR_PGOPT_IGNORETIMEOUT:
 			conn->connInfo.ignore_timeout = CAST_PTR(SQLINTEGER, Value);
