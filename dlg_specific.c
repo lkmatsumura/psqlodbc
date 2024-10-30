@@ -1095,6 +1095,9 @@ MYLOG(0, "drivername=%s\n", drivername);
 	if (SQLGetPrivateProfileString(DSN, INI_IGNORETIMEOUT, NULL_STRING, temp, sizeof(temp), ODBC_INI) > 0)
 		ci->ignore_timeout = atoi(temp);
 
+	if (SQLGetPrivateProfileString(DSN, INI_LOGINTIMEOUT, NULL_STRING, temp, sizeof(temp), ODBC_INI) > 0)
+		ci->login_timeout = atoi(temp);
+
 	if (SQLGetPrivateProfileString(DSN, INI_SSLMODE, NULL_STRING, temp, sizeof(temp), ODBC_INI) > 0)
 		STRCPY_FIXED(ci->sslmode, temp);
 
