@@ -370,6 +370,7 @@ MYLOG(DETAIL_LOG_LEVEL, "hlen=" FORMAT_SSIZE_T "\n", hlen);
 			ABBR_NUMERIC_AS "=%d;"
 			INI_OPTIONAL_ERRORS "=%d;"
 			INI_FETCHREFCURSORS "=%d;"
+			INI_LOGINTIMEOUT = "=%d;"
 #ifdef	_HANDLE_ENLIST_IN_DTC_
 			INI_XAOPT "=%d"	/* XAOPT */
 #endif /* _HANDLE_ENLIST_IN_DTC_ */
@@ -405,6 +406,7 @@ MYLOG(DETAIL_LOG_LEVEL, "hlen=" FORMAT_SSIZE_T "\n", hlen);
 			,ci->numeric_as
 			,ci->optional_errors
 			,ci->fetch_refcursors
+			,ci->login_timeout
 #ifdef	_HANDLE_ENLIST_IN_DTC_
 			,ci->xa_opt
 #endif /* _HANDLE_ENLIST_IN_DTC_ */
@@ -706,7 +708,7 @@ copyConnAttributes(ConnInfo *ci, const char *attribute, const char *value)
 		ci->optional_errors = atoi(value);
 	else if (stricmp(attribute, INI_IGNORETIMEOUT) == 0 || stricmp(attribute, ABBR_IGNORETIMEOUT) == 0)
 		ci->ignore_timeout = atoi(value);
-	else if (stricmp(attribute, INI_LOGINTIMEOUT) == 0)
+	else if (stricmp(attribute, INI_LOGINTIMEOUT) == 0 || stricmp(attribute, ABBR_LOGINTIMEOUT) == 0)
 		ci->login_timeout = atoi(value);
 	else if (stricmp(attribute, INI_SSLMODE) == 0 || stricmp(attribute, ABBR_SSLMODE) == 0)
 	{

@@ -176,6 +176,7 @@ extern "C" {
 #define INI_FETCHREFCURSORS		"FetchRefcursors"
 #define ABBR_FETCHREFCURSORS		"DA"
 #define INI_LOGINTIMEOUT		"LoginTimeout"
+#define ABBR_LOGINTIMEOUT		"L1"
 
 /* "PreferLibpq", abbreviated "D4", used to mean whether to prefer libpq.
  * libpq is now required
